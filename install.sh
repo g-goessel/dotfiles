@@ -9,7 +9,15 @@
 #
 #! /bin/sh
 
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+BACKUPDIR=$SCRIPTPATH/backups/"$(date +'%Y-%m-%d_%T')"
+ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
+
 set -e
+
+# Step ! : install of oh-my-zsh
 
 if ! command -v zsh >/dev/null 2>&1; then
   printf "${YELLOW}Zsh is not installed!${NORMAL} Please install zsh first!\n"
@@ -53,16 +61,20 @@ env git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$ZSH" || 
     fi
 fi
 
-# Step 2 : backup of previous dotfiles
+# Step 2 : dependencies install
 
-SCRIPT=$(readlink -f "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
-BACKUPDIR=$SCRIPTPATH/backups/"$(date +'%Y-%m-%d_%T')"
+git clone https://github.com/bhilburn/powerlevel9k.git $ZSH_CUSTOM/themes/powerlevel9k
 
-mkdir -p BACKUPDIR
+git clone https://github.com/zsh-users/zsh-autosuggestions  $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
-cp %HOME/.zshrc $BACKUPDIR
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
-cp $SCRIPTPATH/.zshrc %HOME/.zshrc
+# Step 3 : backup of previous dotfiles
 
-https://github.com/bhilburn/powerlevel9k
+mkdir -p $BACKUPDIR
+
+cp $HOME/.zshrc $BACKUPDIR
+
+# Step 4 : copy of our zshrc
+
+cp $SCRIPTPATH/.zshrc $HOME/.zshrc
