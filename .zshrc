@@ -14,6 +14,7 @@ plugins=(
   extract
   zsh-autosuggestions
   zsh-syntax-highlighting
+  tmux
 )
 
 # Custom conf
@@ -24,7 +25,7 @@ POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="╭─"
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="╰─\ue0b1 "
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
 COMPLETION_WAITING_DOTS="true"
-export EDITOR='vim'
+export EDITOR='nvim'
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_DISABLE_COMPFIX=true
@@ -35,6 +36,7 @@ ZSH_DISABLE_COMPFIX=true
 [[ $TMUX != "" ]] && export TERM="screen-256color"
 alias cp='cp --reflink=auto'
 alias cp='cp'
+alias vim='nvim'
 alias ff='/Applications/Firefox.app/Contents/MacOS/firefox-bin -P --no-remote'
 source $ZSH/oh-my-zsh.sh
 
