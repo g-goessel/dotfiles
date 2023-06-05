@@ -42,5 +42,7 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=$PATH:${HOME}/.cargo/bin
 
+bindkey '\e[1;3C' forward-word
+bindkey '\e[1;3D' backward-word
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
